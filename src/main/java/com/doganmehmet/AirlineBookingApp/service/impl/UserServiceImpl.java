@@ -85,7 +85,6 @@ public class UserServiceImpl implements UserService {
         log.info("Inside getAccountDetails()");
         var currentUserDTO = modelMapper.map(currentUser(), UserDTO.class);
 
-        System.out.println(currentUserDTO);
         return Response.<UserDTO>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("Successfully retrieved account details")
