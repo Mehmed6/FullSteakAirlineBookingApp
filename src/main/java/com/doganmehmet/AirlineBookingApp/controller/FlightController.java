@@ -53,15 +53,15 @@ public class FlightController {
 
     @GetMapping("/search")
     public ResponseEntity<Response<List<FlightDTO>>> searchFlights(
-            @RequestParam String departureAirportIataCode,
-            @RequestParam String arrivalAirportIataCode,
+            @RequestParam String departureIataCode,
+            @RequestParam String arrivalIataCode,
             @RequestParam(required = false, defaultValue = "SCHEDULED") FlightStatus flightStatus,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate departureDate
     )
     {
         return ResponseEntity.ok(
-                flightService.searchFlights(departureAirportIataCode,
-                        arrivalAirportIataCode,flightStatus,departureDate));
+                flightService.searchFlights(departureIataCode,
+                        arrivalIataCode,flightStatus,departureDate));
     }
 
     @GetMapping("/cities")
