@@ -7,18 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookingDTO {
-
+public class BookingSummaryDTO {
     private String bookingReference;
     private LocalDateTime bookingDate;
     private BookingStatus bookingStatus;
-    private FlightSummaryDTO flight;
-    private UserDTO user;
-    private List<PassengerDTO> passengers;
 }

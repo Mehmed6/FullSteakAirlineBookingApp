@@ -9,24 +9,20 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FlightDTO {
-
+public class FlightSummaryDTO {
     private String id;
     private String flightNumber;
     private FlightStatus flightStatus;
-    private AirportDTO departureAirport;
-    private AirportDTO arrivalAirport;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime departureTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime arrivalTime;
     private BigDecimal basePrice;
-    private UserDTO assignedPilot;
-    private List<BookingSummaryDTO> bookings;;
+    private AirportDTO departureAirport;
+    private AirportDTO arrivalAirport;
 }
