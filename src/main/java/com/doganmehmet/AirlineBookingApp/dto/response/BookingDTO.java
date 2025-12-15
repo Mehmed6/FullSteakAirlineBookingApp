@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BookingDTO {
 
+    private long id;
     private String bookingReference;
     private LocalDateTime bookingDate;
     private BookingStatus bookingStatus;
