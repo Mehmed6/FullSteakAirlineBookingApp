@@ -1,5 +1,7 @@
 package com.doganmehmet.AirlineBookingApp.config;
 
+import com.doganmehmet.AirlineBookingApp.dto.response.PassengerDTO;
+import com.doganmehmet.AirlineBookingApp.entity.Passenger;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
