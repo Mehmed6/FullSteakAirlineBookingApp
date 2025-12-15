@@ -1,6 +1,5 @@
 package com.doganmehmet.AirlineBookingApp.dto.response;
 
-import com.doganmehmet.AirlineBookingApp.entity.Booking;
 import com.doganmehmet.AirlineBookingApp.enums.PassengerType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -15,6 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PassengerDTO {
 
+    private long id;
     private String firstName;
     private String lastName;
     private String passportNumber;
