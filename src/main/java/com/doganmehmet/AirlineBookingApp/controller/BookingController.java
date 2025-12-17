@@ -27,7 +27,7 @@ public class BookingController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'PILOT')")
-    public ResponseEntity<Response<?>> updateBookingStatus(@PathVariable Long id, @RequestParam BookingStatus status)
+    public ResponseEntity<Response<?>> updateBookingStatus(@PathVariable Long id, @RequestBody BookingStatus status)
     {
         return ResponseEntity.ok(bookingService.updateBookingStatus(id, status));
     }
