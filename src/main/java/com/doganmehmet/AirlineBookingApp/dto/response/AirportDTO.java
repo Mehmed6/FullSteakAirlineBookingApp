@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AirportDTO {
+    private long id;
     private String name;
     private String city;
     private String country;
