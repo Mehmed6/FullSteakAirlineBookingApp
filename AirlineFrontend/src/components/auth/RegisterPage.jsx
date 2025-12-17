@@ -1,0 +1,148 @@
+import {useMessage} from "../common/MessageDisplay.jsx";
+import {Link, useNavigate} from "react-router-dom";
+import {useState} from "react";
+import ApiService from "../../services/ApiService.js";
+
+const RegisterPage = () => {
+
+    const {ErrorDisplay, SuccessDisplay, showError, showSuccess} = useMessage();
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        phoneNumber: '',
+        password: '',
+        confirmPassword: ''
+    })
+
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})};
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!formData.fullName || !formData.email || !formData.phoneNumber || !formData.password || !formData.confirmPassword) {
+            showError("Please fill in all fields.");
+            return;
+        }
+
+        if (formData.password !== formData.confirmPassword) {
+            showError("Passwords do not match.");
+            return;
+        }
+
+        const registerData = {
+            fullName : formData.fullName,
+            email : formData.email,
+            phoneNumber : formData.phoneNumber,
+            password : formData.password
+        };
+
+        try {
+            const response = await ApiService.registerUser(registerData);
+            if (response.statusCode === 200) {
+                showSuccess("Registration successful! Redirecting to login...");
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2000);
+            } else {
+                showError(response.message);
+            }
+        } catch (error) {
+            showError(error.response?.data?.message || error.message);
+        }
+    };
+
+    return (
+        <div className="auth-page">
+            <div className="auth-card">
+                <ErrorDisplay/>
+                <SuccessDisplay/>
+                <div className="auth-header">
+                    <h2>Create Your Account</h2>
+                    <p>Join Dogan Airlines for seamless travel experiences</p>
+                </div>
+
+                <form className="auth-form" onSubmit={handleSubmit}>
+
+                    <div className="form-group">
+                        <label htmlFor="">Full Name</label>
+                        <input
+                            type="text"
+                            name="fullName"
+                            id="name"
+                            value={formData.fullName}
+                            onChange={handleChange}
+                            required
+                            placeholder="Enter your full name"
+                        />
+                     </div>
+
+                    <div className="form-group">
+                        <label htmlFor="">Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            placeholder="Enter your email address"
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="">Phone Number</label>
+                        <input
+                            type="tel"
+                            name="phoneNumber"
+                            id="phoneNumber"
+                            value={formData.phoneNumber}
+                            onChange={handleChange}
+                            required
+                            placeholder="Enter your phone number"
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                            placeholder="Enter your password"
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="">Confirm Password</label>
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            id="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            required
+                            placeholder="Enter your password again"
+                        />
+                    </div>
+
+                    <button className="auth-button" type="submit">
+                        Create Account
+                    </button>
+
+                    <div className="auth-footer">
+                        <p>Already have an account? <Link to="/login">Sign in here</Link></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    )
+
+};
+
+export default RegisterPage
