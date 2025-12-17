@@ -51,11 +51,13 @@ public class AirportServiceImpl implements AirportService {
         var existingAirport = airportRepository.findById(airportUpdateDTO.getId())
                 .orElseThrow(() -> new NotFoundException("Airport Not Found"));
 
-        if (airportUpdateDTO.getCity() != null) {
-            if (!existingAirport.getCountry().equals(airportUpdateDTO.getCity().getCountry()))
+        var newCountry = airportUpdateDTO.getCountry();
+        if (newCountry != null) {
+            var city = airportUpdateDTO.getCity() != null ? airportUpdateDTO.getCity() : existingAirport.getCity();
+            if (!city.getCountry().equals(newCountry)) {
                 throw new BadRequestException("CITY does not belong to the Country");
-
-            existingAirport.setCity(airportUpdateDTO.getCity());
+            }
+            existingAirport.setCountry(newCountry);
         }
 
         if (StringUtils.hasText(airportUpdateDTO.getName()))
