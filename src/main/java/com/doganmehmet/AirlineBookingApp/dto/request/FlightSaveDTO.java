@@ -23,10 +23,10 @@ public class FlightSaveDTO {
     private String flightNumber;
     private FlightStatus flightStatus;
     @NotNull(message = "Departure time cannot be null")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime departureTime;
     @NotNull(message = "Arrival time cannot be null")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime arrivalTime;
     @NotNull(message = "Base price cannot be null")
     @Positive(message = "Base price must be positive")
